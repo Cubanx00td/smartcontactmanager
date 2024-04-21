@@ -20,8 +20,8 @@
 						this is search result
 					</div>
 				</div>
-				
-				<table class="table">
+				<div class="table-responsive">
+				<table class="table table-hover">
 				  <thead>
 				    <tr>
 				      <th scope="col">ID</th>
@@ -51,7 +51,7 @@
 				    </tr>
 				  </tbody>
 				</table>
-				
+				</div>
 				<div class="text-center">
 					<nav aria-label="Page navigation example">
 					  <ul class="pagination text-center">
@@ -64,6 +64,12 @@
 				</div>
 			</div>
 		</div>
+		<script>
+			$(document).ready(()=>{
+				$(".item").removeClass("active");
+				$("#contacts-link").addClass("active");
+			});
+		</script>
 	</section>
 </body>
 </html>

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,9 @@ public class UserController {
 	
 	@Autowired
 	private ContactRepository contactRepository;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	// method for adding common data to response
 	@ModelAttribute
@@ -223,5 +227,46 @@ public class UserController {
 	public String yourProfile(Model model) {
 		model.addAttribute("title", "Profile page");
 		return "normal/profile";
+	}
+
+	// user settings
+	@GetMapping("/settings")
+	public String openSettings(Model model){
+		model.addAttribute("title", "Settings");
+		return "normal/settings";
+	}
+
+	// open change password form
+	@GetMapping("/change-password")
+	public String openChangePassword(Model model){
+		model.addAttribute("title", "Change Your Password");
+		return "normal/change_password";
+	}
+
+	// process change password
+	@PostMapping("/process-change-password")
+	public String changePassword(@RequestParam ("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword, RedirectAttributes redirectAttributes, Principal principal){
+		System.out.println("Old Password: " + oldPassword);
+		System.out.println("New Password: " + newPassword);
+
+		String userName = principal.getName();
+		User currUser = this.userRepository.getUserByUserName(userName);
+		System.out.println(currUser.getPassword());
+
+
+		if(this.bCryptPasswordEncoder.matches(oldPassword, currUser.getPassword())){
+			//change the password
+			currUser.setPassword(bCryptPasswordEncoder.encode(newPassword));
+			this.userRepository.save(currUser);
+			redirectAttributes.addFlashAttribute("message", new Message("Your password is updated", "alert-success"));
+		}
+		else{
+			redirectAttributes.addFlashAttribute("message", new Message("Your old password is not correct. \n Password not changed", "alert-danger"));
+			return "redirect:/user/change-password";
+		}
+
+
+
+		return "redirect:/user/index";
 	}
 }

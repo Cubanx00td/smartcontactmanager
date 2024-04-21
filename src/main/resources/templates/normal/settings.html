@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base2::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Settings</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="card my-3">
+            <div class="card-body">
+
+                <div class="settings">
+                    <a href="" th:href="@{/user/change-password}" class="item">Change Password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+			$(document).ready(()=>{
+				$(".item").removeClass("active");
+				$("#settings-link").addClass("active");
+			});
+		</script>
+</section>
+</body>
+</html>

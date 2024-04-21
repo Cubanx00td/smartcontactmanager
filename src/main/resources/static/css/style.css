@@ -100,3 +100,16 @@ body{
 	border: 1px solid grey;
 	display: none;
 }
+
+.active{
+    background: #009688 !important;
+    color:white !important;
+}
+
+.settings a{
+    display: block;
+    width: 100%;
+    padding: 10px 25px;
+    text-decoration: none;
+    color: black;
+}
