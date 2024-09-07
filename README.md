@@ -25,14 +25,13 @@ Smart Contact Manager is a web application built using Spring Boot that simplifi
 
 1. Clone the repository:
 
-git clone https://github.com/your_username/smart-contact-manager.git
+https://github.com/Cubanx00td/smartcontactmanager.git
 
-css
 Copy code
 
 2. Navigate to the project directory:
 
-cd smart-contact-manager
+cd smartcontactmanager
 
 
 3. Build and run the application using Maven:
