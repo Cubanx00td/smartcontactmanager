@@ -27,7 +27,6 @@ Smart Contact Manager is a web application built using Spring Boot that simplifi
 
 https://github.com/Cubanx00td/smartcontactmanager.git
 
-Copy code
 
 2. Navigate to the project directory:
 
